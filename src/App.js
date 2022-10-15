@@ -37,11 +37,9 @@ class App extends React.Component {
         const { quote, author } = json;
         this.setState({ quote, author });
       })
-
       .catch((error) => {
         console.log(error);
-      })
-      
+      })      
   }
 
   render() {
@@ -58,7 +56,8 @@ class App extends React.Component {
             <p className="author">{this.state.author}</p>            
           </div>
           <p><a className="App-link" href="#" onClick={this.nextQuote}>Next quote 👉</a></p>
-        </header>
+          <p><a className="Blog-link" href="https://codehooks.io/blog">Read blog post here</a></p>
+        </header>        
       </div>
     );
   }
