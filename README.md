@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Codehooks.io demo React app - random quotes API
+
+Read more in the blog post [https://codehooks.io/blog/serverless-quotes-api#create-a-quotes-react-app](https://codehooks.io/blog/serverless-quotes-api#create-a-quotes-react-app)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

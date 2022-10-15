@@ -2,14 +2,15 @@ import logo from './logo.svg';
 import React from 'react';
 import './App.css';
 import { API_KEY } from './config'
+const DELAY = 1000*60;
 
 class App extends React.Component {
   // Application state
   state = { quote: 'Famous quotes on the way ...', author: 'Unknown author' };
-
+  
   componentDidMount() {
-    // serve new quotes automatically each 10 sec
-    this.interval = setInterval(this.fetchQuote, 10000);
+    // serve new quotes automatically each minute
+    this.interval = setInterval(this.fetchQuote, DELAY);
 
     // server one at start
     this.fetchQuote();
@@ -18,8 +19,15 @@ class App extends React.Component {
     clearInterval(this.interval);
   }
 
-  fetchQuote = () => {
-    console.log("Get quote")
+  nextQuote = () => {
+    // reset auto
+    clearInterval(this.interval);
+    this.interval = setInterval(this.fetchQuote, DELAY);
+    
+    this.fetchQuote();
+  }
+
+  fetchQuote = () => {    
     fetch("https://quotes-q04p.api.codehooks.io/dev/quote", {
       method: "GET",
       headers: { "x-apikey": API_KEY }
@@ -33,6 +41,7 @@ class App extends React.Component {
       .catch((error) => {
         console.log(error);
       })
+      
   }
 
   render() {
@@ -46,8 +55,9 @@ class App extends React.Component {
           </h2>
           <div className="card">
             <h4 className="heading">{this.state.quote}</h4>
-            <p className="author">{this.state.author}</p>
+            <p className="author">{this.state.author}</p>            
           </div>
+          <p><a className="App-link" href="#" onClick={this.nextQuote}>Next quote 👉</a></p>
         </header>
       </div>
     );
