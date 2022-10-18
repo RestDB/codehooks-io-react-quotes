@@ -27,19 +27,17 @@ class App extends React.Component {
     this.fetchQuote();
   }
 
-  fetchQuote = () => {    
-    fetch("https://quotes-q04p.api.codehooks.io/dev/quote", {
-      method: "GET",
-      headers: { "x-apikey": API_KEY }
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        const { quote, author } = json;
-        this.setState({ quote, author });
+  fetchQuote = async () => {    
+    try {
+      const resp = await fetch("https://quotes-q04p.api.codehooks.io/dev/quote", {
+        method: "GET",
+        headers: { "x-apikey": API_KEY }
       })
-      .catch((error) => {
-        console.log(error);
-      })      
+      const { quote, author } = await resp.json();
+      this.setState({ quote, author });
+    } catch (ex) {
+      console.error(ex);
+    }
   }
 
   render() {
